@@ -5,11 +5,17 @@ class Puzzle:
         self.cols = []
         self.regions = []
 
+        self.buildGraph(nums)
 
-    def isCellValid(self, cell):
-        cellnum = cell.num
-        if cell.row.countNum(cellnum) == 1 \
-            and cell.col.countNum(cellnum) == 1 \
-                and cell.region.countNum(cellnum) == 1:
-            return True
-        return False
+
+    def buildGraph(self, nums):
+        pass
+
+    def backtrackingSolve(self):
+        pass
+
+    def crooksAlgoSolve(self):
+        pass
+
+    def simulatedAnnealingSolve(self):
+        pass
