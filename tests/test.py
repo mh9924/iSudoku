@@ -24,5 +24,13 @@ class SudokuTest:
 
         p.printSudoku()
 
+    @staticmethod
+    def crooksAlgo():
+        pass
+
+    @staticmethod
+    def dancingLinks():
+        pass
+
 test = SudokuTest()
 test.backtracking()
