@@ -5,6 +5,10 @@ from src import Row
 
 class Puzzle:
     def __init__(self, nums):
+        if len(nums) != 81:
+            print("Sudoku must be 9x9.")
+            return
+
         self.cells = []
         self.rows = []
         self.cols = []
@@ -15,24 +19,70 @@ class Puzzle:
 
     def buildGraph(self, nums):
         for i in range(0, 9):
-            row = Row()
-            col = Column()
-            region = Region()
+            row = Row.Row()
+            col = Column.Column()
+            region = Region.Region()
 
             self.rows.append(row)
             self.cols.append(col)
             self.regions.append(region)
 
-        i = 0
-        for n in nums:
-            c = Cell(n)
-            self.cells.append(c)
-            self.cols[i].cells.append(c)
+        colNo = 0
+        rowNo = 0
 
-            i += 1
+        for n in nums:
+            if colNo == 9:
+                colNo = 0
+                rowNo += 1
+
+            c = Cell.Cell(n)
+            cellCol = self.cols[colNo]
+            cellRow = self.rows[rowNo]
+            cellRegion = self.regions[rowNo//3 * 3 + colNo//3]
+            c.col = cellCol
+            c.row = cellRow
+            c.region = cellRegion
+
+            self.cells.append(c)
+            cellCol.cells.append(c)
+            cellRow.cells.append(c)
+            cellRegion.cells.append(c)
+
+            colNo += 1
+
+    def printSudoku(self):
+        for r in self.rows:
+            for c in r.cells:
+                print("|", end="")
+
+                if c.num is None:
+                    print(" ", end="")
+                else:
+                    print(c.num, end="")
+
+            print("|")
 
     def backtrackingSolve(self):
-        pass
+        c = None
+
+        for cell in self.cells:
+            if cell.num is None:
+                c = cell
+                break
+
+        if c is None:
+            return True
+
+        for candidate in range(1, 10):
+            if c.isValid(candidate):
+                c.num = candidate
+
+                if self.backtrackingSolve():
+                    return True
+
+                c.num = None
+
+        return False
 
     def crooksAlgoSolve(self):
         pass
