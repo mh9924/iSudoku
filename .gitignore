@@ -102,3 +102,4 @@ ENV/
 *.pyc
 *.iml
 *.xml
+*.pyc
