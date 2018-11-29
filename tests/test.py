@@ -39,10 +39,14 @@ class SudokuTest:
             print()
 
     def crooksAlgo(self):
-        pass
+        puzzles = self.openPuzzles("sudoku.csv")
+        puzzleObj = Puzzle.Puzzle(list(puzzles[0]))
+
+        puzzleObj.crooksAlgoSolve()
 
     def dancingLinks(self):
         pass
 
 test = SudokuTest()
-test.backtracking()
+#test.backtracking()
+test.crooksAlgo()

@@ -91,6 +91,7 @@ class Puzzle:
         for cell in self.cells: #cell.region will give the region object
             if cell.num != None:    # The cell object has
                 for cell in cell.row.cells:#remove cell.num from the possible number list in the row
+                    print(cell.num)
                     cell.possibleNums.remove(cell.num)
                 for cell in cell.col.cells:#remove cell.num from the possible number list in the column
                     cell.possibleNums.remove(cell.num)
@@ -98,10 +99,15 @@ class Puzzle:
 
             if cell.num is None:
                 c = cell
+                cell.num = c.possibleNums[0]
+                if self.crooksAlgoSolve():
+                    return True
+
                 break
 
         if c is None:
             return True
+
 
         pass
 
