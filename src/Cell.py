@@ -6,7 +6,7 @@ class Cell:
         self.region = None
 
         self.flag = False
-        self.possibleNums = []
+        self.possibleNums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     def isValid(self, cellnum):
         if not self.row.containsNum(cellnum) \

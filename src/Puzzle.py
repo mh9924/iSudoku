@@ -85,6 +85,24 @@ class Puzzle:
         return False
 
     def crooksAlgoSolve(self):
+        c = None
+
+
+        for cell in self.cells: #cell.region will give the region object
+            if cell.num != None:    # The cell object has
+                for cell in cell.row.cells:#remove cell.num from the possible number list in the row
+                    cell.possibleNums.remove(cell.num)
+                for cell in cell.col.cells:#remove cell.num from the possible number list in the column
+                    cell.possibleNums.remove(cell.num)
+
+
+            if cell.num is None:
+                c = cell
+                break
+
+        if c is None:
+            return True
+
         pass
 
     def dancingLinksSolve(self):
