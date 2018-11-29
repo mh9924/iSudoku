@@ -31,6 +31,12 @@ class Puzzle:
         rowNo = 0
 
         for n in nums:
+            if isinstance(n, str):
+                n = int(n)
+
+            if n == 0:
+                n = None
+                
             if colNo == 9:
                 colNo = 0
                 rowNo += 1
