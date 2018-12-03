@@ -96,9 +96,12 @@ class Puzzle:
 
         for cell in self.cells: #cell.region will give the region object
             if cell.num != None:    # The cell object has
+                firstNum = cell.num
                 for cell in cell.row.cells:#remove cell.num from the possible number list in the row
+                    print(cell.possibleNums)
                     print(cell.num)
-                    cell.possibleNums.remove(cell.num)
+                    print(firstNum)
+                    cell.possibleNums.remove(firstNum)
                 for cell in cell.col.cells:#remove cell.num from the possible number list in the column
                     cell.possibleNums.remove(cell.num)
 

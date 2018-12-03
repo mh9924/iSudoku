@@ -42,6 +42,8 @@ class SudokuTest:
         puzzles = self.openPuzzles("sudoku.csv")
         puzzleObj = Puzzle.Puzzle(list(puzzles[0]))
 
+        puzzleObj.printSudoku()
+
         puzzleObj.crooksAlgoSolve()
 
     def dancingLinks(self):
