@@ -15,44 +15,23 @@ class SudokuTest:
 
         return puzzles
 
-    def filterPuzzles(self, puzzles, difficulty, n):
-        filteredPuzzles = []
-
-        for puzzle in puzzles:
-            numClues = 81 - puzzle.count('0')
-
-            if difficulty == "e":
-                if numClues >= 28 and numClues <= 32:
-                    filteredPuzzles.append(puzzle)
-
-            if difficulty == "m":
-                if numClues >= 23 and numClues <= 27:
-                    filteredPuzzles.append(puzzle)
-
-            if difficulty == "h":
-                if numClues >= 17 and numClues <= 22:
-                    filteredPuzzles.append(puzzle)
-
-            if len(filteredPuzzles) == n:
-                break
-
-        return filteredPuzzles
-
     def backtracking(self):
-        puzzles = self.openPuzzles("sudoku.csv")
-        puzzleObjs = []
+        randomPuzzles = self.openPuzzles("sudoku.csv")
+        easyPuzzles = self.openPuzzles
+        randomPuzzleObjs = []
         easyPuzzleObjs = []
         medPuzzleObjs = []
         hardPuzzleObjs = []
 
-        n = 100
+        n = 1000
 
-        easyPuzzles = self.filterPuzzles(puzzles, "e", n)
-        medPuzzles = self.filterPuzzles(puzzles, "m", n)
-        hardPuzzles = self.filterPuzzles(puzzles, "h", n)
+        randomPuzzles = randomPuzzles[:n]
+        easyPuzzles = randomPuzzles[:n]
+        medPuzzles = randomPuzzles[:n]
+        hardPuzzles = randomPuzzles[:n]
 
-        for puzzle in puzzles[:n]:
-            puzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
+        for puzzle in randomPuzzles:
+            randomPuzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
 
         for puzzle in easyPuzzles:
             easyPuzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
@@ -63,41 +42,51 @@ class SudokuTest:
         for puzzle in hardPuzzles:
             hardPuzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
 
-        print("n = " + str(n))
+        puzzleSets = [randomPuzzleObjs, easyPuzzleObjs, medPuzzleObjs, hardPuzzleObjs]
+        i = 0
+        names = ["RANDOM PUZZLES (n=" + str(n) + "):", "EASY PUZZLES:", "MEDIUM PUZZLES:", "HARD PUZZLES:"]
 
-        timeSum = 0
-        timeMin = 0
-        timeMax = 0
+        for puzzleSet in puzzleSets:
+            timeSum = 0
+            timeMin = 0
+            timeMax = 0
 
-        for puzzleObj in puzzleObjs:
-            print("------------------------------------")
+            print(names[i])
             print()
 
-            puzzleObj.printSudoku()
+            for puzzleObj in puzzleSet:
+                # print("------------------------------------")
+                # print()
 
-            start = time.time()
-            puzzleObj.backtrackingSolve()
-            end = time.time()
-            timeTaken = end - start
+                # puzzleObj.printSudoku()
 
-            if timeMin == 0 or timeTaken < timeMin:
-                timeMin = timeTaken
+                start = time.time()
+                puzzleObj.backtrackingSolve()
+                end = time.time()
+                timeTaken = end - start
 
-            if timeTaken > timeMax:
-                timeMax = timeTaken
+                if timeMin == 0 or timeTaken < timeMin:
+                    timeMin = timeTaken
 
+                if timeTaken > timeMax:
+                    timeMax = timeTaken
+
+                # print()
+                # print("Solved via backtracking in " + str(timeTaken) + "s")
+
+                timeSum += timeTaken
+
+                # puzzleObj.printSudoku()
+                # print()
+
+            print("With " + str(len(puzzleSet)) + " puzzles: Took " + str(timeSum) + "s total")
+            print("Average time per puzzle: " + str(timeSum / n) + "s")
+            print("Minimum time a puzzle took: " + str(timeMin) + "s")
+            print("Maximum time a puzzle took: " + str(timeMax) + "s")
             print()
-            print("Solved via backtracking in " + str(timeTaken) + "s")
-
-            timeSum += timeTaken
-
-            puzzleObj.printSudoku()
             print()
 
-        print("With " + str(n) + " puzzles: Took " + str(timeSum) + "s total")
-        print("Average time per puzzle: " + str(timeSum / n) + "s")
-        print("Minimum time a puzzle took: " + str(timeMin) + "s")
-        print("Maximum time a puzzle took: " + str(timeMax) + "s")
+            i += 1
 
     def crooksAlgo(self):
         puzzles = self.openPuzzles("sudoku.csv")
