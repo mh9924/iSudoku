@@ -26,7 +26,7 @@ class SudokuTest:
         medPuzzleObjs = []
         hardPuzzleObjs = []
 
-        n = 5
+        n = 100
         randomPuzzles = randomPuzzles[:n]
 
         for puzzle in randomPuzzles:
