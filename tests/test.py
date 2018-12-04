@@ -17,7 +17,7 @@ class SudokuTest:
 
     def backtracking(self):
         randomPuzzles = self.openPuzzles("sudoku.csv")
-        easyPuzzles = self.openPuzzles
+        easyPuzzles = self.openPuzzles("sudoku-easy.csv")
         randomPuzzleObjs = []
         easyPuzzleObjs = []
         medPuzzleObjs = []
@@ -26,7 +26,6 @@ class SudokuTest:
         n = 1000
 
         randomPuzzles = randomPuzzles[:n]
-        easyPuzzles = randomPuzzles[:n]
         medPuzzles = randomPuzzles[:n]
         hardPuzzles = randomPuzzles[:n]
 
