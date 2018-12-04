@@ -1,4 +1,5 @@
 from src import Puzzle
+import time
 
 
 class SudokuTest:
@@ -18,25 +19,46 @@ class SudokuTest:
     def backtracking(self):
         puzzles = self.openPuzzles("sudoku.csv")
         puzzleObjs = []
+        n = 1000
 
-        for puzzle in puzzles[:10]:
+        for puzzle in puzzles[:n]:
             puzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
 
-        print(len(puzzleObjs))
-        print(puzzleObjs[0].cells[2].num)
+        print("n = " + str(n))
+
+        timeSum = 0
+        timeMin = 0
+        timeMax = 0
 
         for puzzleObj in puzzleObjs:
             print("------------------------------------")
             print()
 
             puzzleObj.printSudoku()
+
+            start = time.time()
             puzzleObj.backtrackingSolve()
+            end = time.time()
+            timeTaken = end - start
+
+            if timeMin == 0 or timeTaken < timeMin:
+                timeMin = timeTaken
+
+            if timeTaken > timeMax:
+                timeMax = timeTaken
 
             print()
-            print("Solved via backtracking:")
+            print("Solved via backtracking in " + str(timeTaken) + "s")
+
+            timeSum += timeTaken
 
             puzzleObj.printSudoku()
             print()
+
+        print("With " + str(n) + " puzzles: Took " + str(timeSum) + "s total")
+        print("Average time per puzzle: " + str(timeSum / n) + "s")
+        print("Minimum time a puzzle took: " + str(timeMin) + "s")
+        print("Maximum time a puzzle took: " + str(timeMax) + "s")
 
     def crooksAlgo(self):
         puzzles = self.openPuzzles("sudoku.csv")
@@ -50,5 +72,5 @@ class SudokuTest:
         pass
 
 test = SudokuTest()
-#test.backtracking()
-test.crooksAlgo()
+test.backtracking()
+# test.crooksAlgo()
