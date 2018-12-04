@@ -18,16 +18,16 @@ class SudokuTest:
     def backtracking(self):
         randomPuzzles = self.openPuzzles("sudoku.csv")
         easyPuzzles = self.openPuzzles("sudoku-easy.csv")
+        medPuzzles = self.openPuzzles("sudoku-med.csv")
+        hardPuzzles = self.openPuzzles("sudoku-hard.csv")
+
         randomPuzzleObjs = []
         easyPuzzleObjs = []
         medPuzzleObjs = []
         hardPuzzleObjs = []
 
-        n = 1000
-
+        n = 5
         randomPuzzles = randomPuzzles[:n]
-        medPuzzles = randomPuzzles[:n]
-        hardPuzzles = randomPuzzles[:n]
 
         for puzzle in randomPuzzles:
             randomPuzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
@@ -54,10 +54,10 @@ class SudokuTest:
             print()
 
             for puzzleObj in puzzleSet:
-                # print("------------------------------------")
-                # print()
+                print("------------------------------------")
+                print()
 
-                # puzzleObj.printSudoku()
+                puzzleObj.printSudoku()
 
                 start = time.time()
                 puzzleObj.backtrackingSolve()
@@ -70,13 +70,13 @@ class SudokuTest:
                 if timeTaken > timeMax:
                     timeMax = timeTaken
 
-                # print()
-                # print("Solved via backtracking in " + str(timeTaken) + "s")
+                print()
+                print("Solved via backtracking in " + str(timeTaken) + "s")
 
                 timeSum += timeTaken
 
-                # puzzleObj.printSudoku()
-                # print()
+                puzzleObj.printSudoku()
+                print()
 
             print("With " + str(len(puzzleSet)) + " puzzles: Took " + str(timeSum) + "s total")
             print("Average time per puzzle: " + str(timeSum / n) + "s")
