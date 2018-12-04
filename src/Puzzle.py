@@ -90,22 +90,19 @@ class Puzzle:
 
         return False
 
-    def crooksAlgoSolve(self):
+      def crooksAlgoSolve(self):
         c = None
 
+        for cell in self.cells:  # cell.region will give the region object
+            if cell.num != None:  # The cell object has something in it
 
-        for cell in self.cells: #cell.region will give the region object
-            if cell.num != None:    # The cell object has
-                firstNum = cell.num
-                for cell in cell.row.cells:#remove cell.num from the possible number list in the row
-                    print(cell.possibleNums)
+                for cell in cell.row.cells:  # remove cell.num from the possible number list in the row
                     print(cell.num)
-                    print(firstNum)
-                    cell.possibleNums.remove(firstNum)
-                for cell in cell.col.cells:#remove cell.num from the possible number list in the column
-                    cell.possibleNums.remove(cell.num)
-
-
+                    if cell.containPossible(cell.num):
+                        cell.possibleNums.remove(cell.num)
+                for cell in cell.col.cells:  # remove cell.num from the possible number list in the column
+                    if cell.containPossible(cell.num):
+                        cell.possibleNums.remove(cell.num)
             if cell.num is None:
                 c = cell
                 cell.num = c.possibleNums[0]
@@ -113,6 +110,11 @@ class Puzzle:
                     return True
 
                 break
+
+        if c is None:
+            return True
+
+        pass
 
         if c is None:
             return True
