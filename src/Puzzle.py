@@ -106,10 +106,10 @@ class Puzzle:
 
                 for cell in cell.row.cells:  # remove cell.num from the possible number list in the row
                     print(cell.num)
-                    if cell.containPossible(cell.num):
+                    if cell.num in cell.possibleNums:
                         cell.possibleNums.remove(cell.num)
                 for cell in cell.col.cells:  # remove cell.num from the possible number list in the column
-                    if cell.containPossible(cell.num):
+                    if cell.num in cell.possibleNums:
                         cell.possibleNums.remove(cell.num)
             if cell.num is None:
                 c = cell

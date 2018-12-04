@@ -96,6 +96,8 @@ class SudokuTest:
 
         puzzleObj.crooksAlgoSolve()
 
+        puzzleObj.printSudoku()
+
     def dancingLinks(self):
         pass
 
