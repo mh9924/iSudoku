@@ -15,14 +15,53 @@ class SudokuTest:
 
         return puzzles
 
+    def filterPuzzles(self, puzzles, difficulty, n):
+        filteredPuzzles = []
+
+        for puzzle in puzzles:
+            numClues = 81 - puzzle.count('0')
+
+            if difficulty == "e":
+                if numClues >= 28 and numClues <= 32:
+                    filteredPuzzles.append(puzzle)
+
+            if difficulty == "m":
+                if numClues >= 23 and numClues <= 27:
+                    filteredPuzzles.append(puzzle)
+
+            if difficulty == "h":
+                if numClues >= 17 and numClues <= 22:
+                    filteredPuzzles.append(puzzle)
+
+            if len(filteredPuzzles) == n:
+                break
+
+        return filteredPuzzles
 
     def backtracking(self):
         puzzles = self.openPuzzles("sudoku.csv")
         puzzleObjs = []
-        n = 1000
+        easyPuzzleObjs = []
+        medPuzzleObjs = []
+        hardPuzzleObjs = []
+
+        n = 100
+
+        easyPuzzles = self.filterPuzzles(puzzles, "e", n)
+        medPuzzles = self.filterPuzzles(puzzles, "m", n)
+        hardPuzzles = self.filterPuzzles(puzzles, "h", n)
 
         for puzzle in puzzles[:n]:
             puzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
+
+        for puzzle in easyPuzzles:
+            easyPuzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
+
+        for puzzle in medPuzzles:
+            medPuzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
+
+        for puzzle in hardPuzzles:
+            hardPuzzleObjs.append(Puzzle.Puzzle(list(puzzle)))
 
         print("n = " + str(n))
 
