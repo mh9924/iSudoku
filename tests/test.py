@@ -76,6 +76,7 @@ class SudokuTest:
                 timeSum += timeTaken
 
                 puzzleObj.printSudoku()
+                print(puzzleObj.isValid())
                 print()
 
             print("With " + str(len(puzzleSet)) + " puzzles: Took " + str(timeSum) + "s total")
@@ -99,5 +100,12 @@ class SudokuTest:
         pass
 
 test = SudokuTest()
+print()
+print("----BACKTRACKING ALGORITHM----")
+print()
 test.backtracking()
-# test.crooksAlgo()
+
+print()
+print("----CROOKS ALGORITHM----")
+print()
+test.crooksAlgo()

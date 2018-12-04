@@ -56,6 +56,14 @@ class Puzzle:
 
             colNo += 1
 
+    def isValid(self):
+        # Check if puzzle is valid and completed.
+        for cell in self.cells:
+            if not cell.isValid():
+                return False
+
+        return True
+
     def printSudoku(self):
         for r in self.rows:
             for c in r.cells:
@@ -80,7 +88,7 @@ class Puzzle:
             return True
 
         for candidate in range(1, 10):
-            if c.isValid(candidate):
+            if c.isValidCandidate(candidate):
                 c.num = candidate
 
                 if self.backtrackingSolve():
