@@ -8,7 +8,10 @@ class Cell:
         self.flag = False
         self.possibleNums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-    def isValid(self, cellnum):
+    def isValid(self, cellnum = None):
+        if cellnum is None:
+            cellnum = self.num
+
         if not self.row.containsNum(cellnum) \
             and not self.col.containsNum(cellnum) \
                 and not self.region.containsNum(cellnum):

@@ -90,7 +90,7 @@ class Puzzle:
 
         return False
 
-      def crooksAlgoSolve(self):
+    def crooksAlgoSolve(self):
         c = None
 
         for cell in self.cells:  # cell.region will give the region object
