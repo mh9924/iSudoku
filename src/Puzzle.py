@@ -79,19 +79,19 @@ class Puzzle:
     def backtrackingSolve(self):
         c = None
 
-        for cell in self.cells:
+        for cell in self.cells: # Iterate over each cell in the puzzle
             if cell.num is None:
-                c = cell
+                c = cell # Work with the first blank cell found.
                 break
 
-        if c is None:
+        if c is None: # If no empty cell is found, the puzzle is solved
             return True
 
         for candidate in range(1, 10):
             if c.isValidCandidate(candidate):
                 c.num = candidate
 
-                if self.backtrackingSolve():
+                if self.backtrackingSolve(): # Recursively branch down possibilities for cell c
                     return True
 
                 c.num = None

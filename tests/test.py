@@ -107,7 +107,8 @@ print("----BACKTRACKING ALGORITHM----")
 print()
 test.backtracking()
 
-print()
+"""print()
 print("----CROOKS ALGORITHM----")
 print()
 test.crooksAlgo()
+"""
